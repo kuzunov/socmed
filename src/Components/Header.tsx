@@ -1,14 +1,11 @@
 import * as React from 'react';
+import Profile from './Profile/Profile';
 
-export interface IHeaderProps {
-}
-
-export default class Header extends React.Component<IHeaderProps> {
-  public render() {
+ const Header = ({children}) => {
     return (
-      <div>
-        
+      <div className="app-header">
+        {children}
       </div>
     );
-  }
 }
+export default Header;
