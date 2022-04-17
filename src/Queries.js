@@ -9,3 +9,12 @@ query GetFeedPosts {
     }
   }
 `
+
+export const CREATE_POST = gql `
+query CreatePost($authorId: String!, $body, $heading) {
+  smschema_posts {
+    authorId
+    body
+    heading
+  }
+}`

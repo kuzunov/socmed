@@ -1,6 +1,6 @@
 import React, {useState,useContext, createContext}from 'react';
 import Feed from './Components/Feed/Feed';
-import { IPost } from './Components/Post/Post';
+// import { IPost } from './Components/Post/Post';
 import { CreatePostForm } from './Components/CreatePostForm/CreatePostForm';
 import LogInButton from './Components/Auth0/LogInButton' 
 import LogoutButton from './Components/Auth0/LogOutButton';
@@ -11,21 +11,24 @@ import {  ApolloProvider,} from '@apollo/client';
 import Profile from './Components/Profile/Profile';
 
 
-export interface iPostContext {
-  posts: IPost[];
-  setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
-}
+// export interface iPostContext {
+//   posts: IPost[];
+//   setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
+// }
+// export const FeedContext = createContext<iPostContext>({
+//   posts: [],
+//   setPosts: () => {},
+// });
 
-export const FeedContext = createContext<iPostContext>({
+
+export const FeedContext = createContext({
   posts: [],
-  setPosts: () => {},
+  setPosts: (post) => {},
 });
 
 function App() {
   const client = makeApolloClient();
   const [posts,setPosts] = useState([
-    {body: "post1", authorName: "kolio", authorId:1, heading:"koliomas"},
-    {body: "post2", authorName: "jono", authorId:2, heading:"jonomas"}
   ]);
   
 
