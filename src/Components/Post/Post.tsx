@@ -19,9 +19,12 @@ const handleDeletePost = () => {
  deletePost({variables:{idToDel:id}});
 }
 const delButton = <>
-
-  {(loading)?'Loading':(error)?`Error ${error.message}`:(data)? 'Deleted' : <button onClick ={handleDeletePost}>x</button>}
-  
+  {
+  loading?'Loading':
+  error?`Error ${error.message}`:
+  data? 'Deleted':
+  <button onClick ={handleDeletePost}>x</button>
+  }
   </>
 
   return <div className="post">
