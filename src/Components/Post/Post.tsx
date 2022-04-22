@@ -1,5 +1,7 @@
 import * as React from 'react';
-
+import { useAuth0 } from '@auth0/auth0-react';
+import { DELETE_POST } from '../../Queries';
+import { useMutation } from '@apollo/client';
 // export interface IPost {
 //     authorName: string | undefined,
 //     authorId:  string | undefined,
@@ -9,11 +11,23 @@ import * as React from 'react';
 
 const Post
 // : React.FunctionComponent<IPost> 
-= ({heading,authorName,body}) => {
+= ({heading,body,authorId,id}) => {
+  const {user} = useAuth0();
+  const [deletePost, { data, loading, error }] = useMutation(DELETE_POST);
+
+const handleDeletePost = () => { 
+ deletePost({variables:{idToDel:id}});
+}
+const delButton = <>
+
+  {(loading)?'Loading':(error)?`Error ${error.message}`:(data)? 'Deleted' : <button onClick ={handleDeletePost}>x</button>}
+  
+  </>
+
   return <div className="post">
-    <h1>{heading}</h1>
-    <h4>by {authorName}</h4>
+    <h4>{heading}</h4><div>by {authorId}</div>
     <div>{body}</div>
+    {(user?.sub==authorId)?   delButton : <></>}
   </div>;
 };
 

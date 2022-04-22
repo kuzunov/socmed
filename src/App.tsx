@@ -1,7 +1,7 @@
 import React, {useState,useContext, createContext}from 'react';
 import Feed from './Components/Feed/Feed';
 // import { IPost } from './Components/Post/Post';
-import { CreatePostForm } from './Components/CreatePostForm/CreatePostForm';
+import CreatePostForm  from './Components/CreatePostForm/CreatePostForm';
 import LogInButton from './Components/Auth0/LogInButton' 
 import LogoutButton from './Components/Auth0/LogOutButton';
 import Header from './Components/Header';
@@ -42,12 +42,10 @@ function App() {
       >
   <ApolloProvider client={client}>
       <Header>
-        <LogInButton />
-        <LogoutButton/>
         <Profile />
-        <Feed />
       </Header>
       <FeedContext.Provider value={{posts,setPosts}} >
+        <Feed />
         <CreatePostForm />
       </FeedContext.Provider>
       </ApolloProvider>

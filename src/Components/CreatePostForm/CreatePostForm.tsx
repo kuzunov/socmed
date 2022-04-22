@@ -8,32 +8,33 @@ import { CREATE_POST } from '../../Queries';
 // export interface ICreatePostFormProps {
 // }
 
-export function CreatePostForm (
+const CreatePostForm  = (
   // props: ICreatePostFormProps
-) {
+) => {
 
   
 //const [post,setPost] = useState({heading:"", body:"",authorName:""});
 const {posts, setPosts} = useContext(FeedContext);
-const {user} = useAuth0();
-
-function handleSubmit(e) {
-  const [addPost, { data, loading, error }] = useMutation(CREATE_POST);
-  if (user) {
+const {user, isAuthenticated} = useAuth0();
+const [addPost, { data, loading, error }] = useMutation(CREATE_POST);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (isAuthenticated) {
     const form = e.target;
     const tempPost = {
+        authorId: user?.sub,
         heading: form.heading.value,
-        body: form.body.value,
-        authorName: user?.name,
-        authorId:user?.sub
+        body: form.body.value,        
     }
-   // setPosts([...posts, tempPost]);
+    console.log(tempPost)
+   setPosts([...posts, tempPost]);
    if (loading) return 'Submitting...';
    if (error) return `Submission error! ${error.message}`;
-   addPost({variables: {body: form.body.value, authorId: user?.sub, heading: form.heading.value}}) 
-   e.preventDefault();}
-    else {e.preventDefault()}
-}
+   addPost({variables: {post: tempPost}}) ;
+   }
+
+  }
+
   return (
     <div className="post-form">
         <form onSubmit={handleSubmit}>
@@ -46,7 +47,11 @@ function handleSubmit(e) {
           <input name="body" type="text" />
         </label>
         <input type="submit" value="Submit" />
+
       </form>
     </div>
   );
+
+
 }
+export default CreatePostForm;

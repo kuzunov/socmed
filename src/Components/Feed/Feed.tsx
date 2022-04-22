@@ -17,19 +17,16 @@ export default function Feed() {
     const { data, loading, error } = useQuery(GET_POSTS);
     const {posts, setPosts} = useContext(FeedContext);
 
-
     return (
       <div className="feed">
         {  
         loading?( <>Loading...</> ) :
-        error? (<>{}Error! ${error.message}</>) :
+        error? (<>Error! ${error.message}</>) :
 
         (<>{
           data.smschema_posts.map((post)=> {
-            return <div key={post.id}>
-            <h4>{post.heading}</h4>
-            <p>{post.body}</p>
-            </div>
+            console.log(post);
+            return <Post {...post}/>
           })
         }</>)
         }
