@@ -31,3 +31,17 @@ mutation DeletePost($idToDel: bigint!) {
   }
 }
 `
+
+export const GET_COMMENTS = gql`
+query GetComments($_eq: bigint = "") {
+  smschema_comments(where: {postId: {_eq: $_eq}}) {
+    authorId
+    body
+    id
+    postId
+    user {
+      username
+    }
+  }
+}
+`

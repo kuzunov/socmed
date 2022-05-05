@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { DELETE_POST } from '../../Queries';
 import { useMutation } from '@apollo/client';
+import PostComments from '../PostComments/PostComments';
 // export interface IPost {
 //     authorName: string | undefined,
 //     authorId:  string | undefined,
@@ -31,6 +32,7 @@ const delButton = <>
     <h4>{heading}</h4><div>by {authorId}</div>
     <div>{body}</div>
     {(user?.sub==authorId)?   delButton : <></>}
+    <PostComments postId={id}/>
   </div>;
 };
 
