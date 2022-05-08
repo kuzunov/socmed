@@ -45,3 +45,13 @@ query GetComments($_eq: bigint = "") {
   }
 }
 `
+
+export const CREATE_COMMENT = gql `
+mutation CreateComment($comment: smschema_comments_insert_input!) {
+  insert_smschema_comments_one(object: $comment) {
+    authorId
+    body
+    postId
+  }
+}
+`
