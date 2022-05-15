@@ -4,6 +4,7 @@ import { DELETE_POST } from '../../Queries';
 import { useMutation } from '@apollo/client';
 import PostComments from '../PostComments/PostComments';
 import AddCommentForm from '../AddCommentForm/AddCommentForm';
+import DeleteButton from '../DeleteButton/DeleteButton';
 // export interface IPost {
 //     authorName: string | undefined,
 //     authorId:  string | undefined,
@@ -20,19 +21,11 @@ const Post
 const handleDeletePost = () => { 
  deletePost({variables:{idToDel:id}});
 }
-const delButton = <>
-  {
-  loading?'Loading':
-  error?`Error ${error.message}`:
-  data? 'Deleted':
-  <button onClick ={handleDeletePost}>x</button>
-  }
-  </>
 
   return <div className="post">
     <h4>{heading}</h4><div>by {authorId}</div>
     <div>{body}</div>
-    {(user?.sub==authorId)?   delButton : <></>}
+    {(user?.sub==authorId)?   <DeleteButton loading={loading} error={error} data={data} fnToDel={handleDeletePost}/> : <></>}
     <PostComments postId={id}/>
     <AddCommentForm postId={id}/>
   </div>;

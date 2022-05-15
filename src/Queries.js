@@ -29,6 +29,11 @@ mutation DeletePost($idToDel: bigint!) {
     heading
     id
   }
+  delete_smschema_comments(where: {postId: {_eq: $idToDel}}){
+    returning {
+      postId
+    }
+  }
 }
 `
 
@@ -52,6 +57,16 @@ mutation CreateComment($comment: smschema_comments_insert_input!) {
     authorId
     body
     postId
+  }
+}
+`
+
+export const DELETE_COMMENT = gql `
+mutation DeleteComment($idToDel: bigint!) {
+  delete_smschema_comments_by_pk(id: $idToDel) {
+    authorId
+    body
+    id
   }
 }
 `
