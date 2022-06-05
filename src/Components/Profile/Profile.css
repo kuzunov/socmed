@@ -1,0 +1,9 @@
+.avatar {
+    max-height: 100px;
+    max-width: 100px;
+    float: right;
+}
+.buttons {width: 100%; text-align: right; align-items: right;}
+
+.username {width: 100%;}
+.email {width: 100%;}
